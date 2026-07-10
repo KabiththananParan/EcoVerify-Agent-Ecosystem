@@ -6,7 +6,7 @@ from app.agents.verification_agent import VerificationAgent
 from app.agents.confidence_agent import ConfidenceAgent
 
 
-class Coordinator():
+class Coordinator:
     
     def coordinate(self, shared_state: SharedState) -> SharedState:
         shared_state.workflow_status = "Running"
