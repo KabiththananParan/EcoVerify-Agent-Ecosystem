@@ -2,6 +2,10 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 
 
+from app.core.shared_state import SharedState
+from app.agents.coordinator import Coordinator
+
+
 class VerificationInput(BaseModel):
     claim: str
     sources:list[str] | None = None
@@ -32,5 +36,8 @@ def get_health():
     
 @app.post("/verify")
 def verify(request : VerificationInput):
-    return request
+    shared_state = SharedState.from_verification_input(request)
+    
+    return Coordinator(shared_state)
+    
 
